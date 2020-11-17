@@ -497,13 +497,12 @@ class SubmitForm extends React.Component {
           </Form.Group>
         : <span>Please ensure you have added a pushpin to the map to allow others to find
             your ride easier, and that all fields are filled in.<br /><br /></span>}
-        {this.state.Conf && this.state.Loc!=""?
-          <Form.Group as={Row}>
-            <Col xs={{ span: 10, offset: 1 }}>
-              <Button variant="maroon1" type="submit">{globalEditBool?"Edit":"Submit"}</Button>
-            </Col>
-          </Form.Group>
-        : <span><br /><br /></span>}
+        <Form.Group as={Row}>
+          <Col xs={{ span: 10, offset: 1 }}>
+            <Button variant="maroon1" type="submit" active={this.state.Conf} disabled={!this.state.Conf}>
+              {globalEditBool?"Edit":"Submit"}</Button>
+          </Col>
+        </Form.Group>
         <RideAddedModal
           show={this.state.ShowModal}
           onHide={this.ResetSubmit}
