@@ -102,12 +102,18 @@ function tConvert(time) {
   return time.join(''); // return adjusted time or original string
 }
 
+function addDay(date) {
+  var d = new Date(date);
+  d.setDate(d.getDate() + 1);
+  return d;
+}
+
 function RideEntry(that, {id, toMac, date, time, loc, lat, lon, name, contact, img}) {
   return (
     <Row className="ride" key={id}>
       <Col className="my-auto" xs={5}>
         <span>{toMac ? "From" : "To"}: <b>{loc}</b></span><br />
-        <span>Date: <b>{new Date(date).toString().substr(4,3)+"-"+date.substr(-2,2)+"-"+date.substr(0,4)}</b></span><br />
+        <span>Date: <b>{addDay(date).toString().substr(4,3)+"-"+date.substr(-2,2)+"-"+date.substr(0,4)}</b></span><br />
         <span>Time: <b>{tConvert(time)}</b></span></Col>
       <Col className="my-auto avatarContainer" xs={2}><img src={img} className="avatar" /></Col>
       <Col className="my-auto"><span><b>{name}</b></span><br /><span>{contact}</span></Col>
@@ -123,7 +129,7 @@ function MyRideEntry(that, {id, toMac, date, time, loc, lat, lon, name, contact,
     <Row className="ride" key={id}>
       <Col className="my-auto" xs={5}>
         <span>{toMac ? "From" : "To"}: <b>{loc}</b></span><br />
-        <span>Date: <b>{new Date(date).toString().substr(4,3)+"-"+date.substr(-2,2)+"-"+date.substr(0,4)}</b></span><br />
+        <span>Date: <b>{addDay(date).toString().substr(4,3)+"-"+date.substr(-2,2)+"-"+date.substr(0,4)}</b></span><br />
         <span>Time: <b>{tConvert(time)}</b></span></Col>
       <Col className="my-auto avatarContainer" xs={2}><img src={img} className="avatar" /></Col>
       <Col className="my-auto"><span><b>{name}</b></span><br /><span>{contact}</span></Col>
@@ -484,7 +490,7 @@ class SubmitForm extends React.Component {
             <Form.Label column xs={11}>
               I am driving {this.state.ToMac?"from":"to"}{" "}
               {this.state.Loc}{" "}{this.state.ToMac?"to":"from"}{" "}
-              Mac on {new Date(this.state.Date).toString().substr(0,7)}{" "}
+              Mac on {addDay(this.state.Date).toString().substr(0,7)}{" "}
               {this.state.Date.substr(-2,2)+", "+this.state.Date.substr(0,4)}{" "}
               at {tConvert(this.state.Time)}.
             </Form.Label>
